@@ -1,6 +1,5 @@
 $(document).ready(function(){
   window.dancers = [];
-
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -16,18 +15,43 @@ $(document).ready(function(){
      * to the stage.
      */
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-
+    console.log(dancerMakerFunctionName);
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
     // make a dancer with a random position
 
-    var dancer = dancerMakerFunction(
+    var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
       Math.random() * 1000
     );
     $('body').append(dancer.$node);
+    window.dancers.push(dancer);
   });
-});
 
+  $(".lineUpButton").on("click", function(event) {
+    var height = $('body').height();
+    window.dancers.forEach(function(dancer, index, arr) {
+      var positionTop = (height / arr.length) * (index + 0.25);
+      var positionLeft = 10;
+      console.log(dancer);
+      dancer.lineUp(positionTop, positionLeft);
+    });
+  });
+
+  $(".pairUpButton").on("click", function(event) {
+    // var dancers = window.dancers;
+    for (var i = 0; i < dancers.length; i += 2) {
+      var dancerA = dancers[i];
+      var dancerB = dancers[i + 1];
+      dancerA.partner = dancerB;
+      dancerB.partner = dancerA;
+      var pairTop = (dancerA.currentTop + dancerB.currentTop) / 2;
+      var pairLeft = (dancerA.currentLeft + dancerB.currentLeft) / 2;
+      dancerA.setPosition(pairTop, pairLeft - 30);
+      dancerB.setPosition(pairTop, pairLeft + 30);
+    }
+  });
+
+});

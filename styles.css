@@ -1,5 +1,7 @@
 body, html{
   height:100%;
+  overflow: hidden;
+  -webkit-backface-visibility:hidden;
 }
 body{
   margin: 0px;
@@ -24,4 +26,16 @@ body, a:link, a:visited, a:active{
   border:10px solid red;
   border-radius:10px;
   position:absolute;
+}
+.sonic{
+  transform: null;
+  -webkit-transform: null;
+  transition: transform 2s;
+  -webkit-transition: -webkit-transform 2s;
+}
+.sonic:hover{
+  transition: transform 2s;
+  -webkit-transition: -webkit-transform 2s;
+  transform: rotate(-3230deg);
+  -webkit-transform: rotate(-3230deg);
 }

@@ -18,7 +18,7 @@ var makeDancer = function(top, left, timeBetweenSteps){
 makeDancer.prototype.step = function(){
   // the basic dancer doesn't do anything interesting at all on each step,
   // it just schedules the next step
-   this.state = !this.state;
+  this.state = !this.state;
   setTimeout(this.step.bind(this), this.timeBetweenSteps);
 
 };
@@ -27,21 +27,19 @@ makeDancer.prototype.setPosition = function(top, left){
   // Use css top and left properties to position our <span> tag
   // where it belongs on the page. See http://api.jquery.com/css/
   //
+
+  var time = (this instanceof makeSonicDancer) ? 1.5 : this.timeBetweenSteps / 1000;
   var styleSettings = {
     top: top,
     left: left,
-   // "-webkit-transition": "top 2s, left 2s, -webkit-transform 2s",
-   //  transition: "top 2s, left 2s, transform 2s"
+   "-webkit-transition": "top "+time+"s, left "+time+"s, -webkit-transform "+time+"s, border-width "+time+"s, border-radius "+time+"s, border-color "+time+"s",
+    transition: "top "+time+"s, left "+time+"s, transform "+time+"s, border-width "+time+"s, border-radius "+time+"s, border-color "+time+"s"
   };
+  this.oldTop = this.currentTop || null;
+  this.oldLeft = this.currentLeft || null;
   this.currentTop = top;
   this.currentLeft = left;
   this.$node.css(styleSettings);
-  setTimeout(function() {
-    this.$node.css({
-      "-webkit-transition": "-webkit-transform 2s",
-      transition: "transform 2s"
-    }).call(this);
-  }, 1000);
 };
 
 makeDancer.prototype.lineUp = function(top, left) {
@@ -49,7 +47,6 @@ makeDancer.prototype.lineUp = function(top, left) {
 };
 
 makeDancer.prototype.animate = function(start, end) {
-  console.log('called');
   var argsArray = Array.prototype.slice.call(arguments, 2);
   var startProperties = {};
   var endProperties = {};
@@ -59,8 +56,8 @@ makeDancer.prototype.animate = function(start, end) {
   });
 
   if (this.state) {
-    this.$node.animate(startProperties, this.timeBetweenSteps);
+    this.$node.css(startProperties);
   } else {
-    this.$node.animate(endProperties, this.timeBetweenSteps);
+    this.$node.css(endProperties);
   }
 };

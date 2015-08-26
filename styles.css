@@ -1,3 +1,8 @@
+html {
+  background:linear-gradient( rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25) ), url("src/assets/disco.gif");
+  background-size: 100%;
+}
+
 body, html{
   height:100%;
   overflow: hidden;
@@ -5,7 +10,6 @@ body, html{
 }
 body{
   margin: 0px;
-  background-color:#444;
   font-size: 18px;
 }
 body, a:link, a:visited, a:active{
@@ -14,6 +18,13 @@ body, a:link, a:visited, a:active{
 .title, .addDancerButton{
   padding:5px 12px;
   float:right;
+  font-size: 16px;
+}
+
+.otherButtons{
+  padding:5px 12px;
+  float:left;
+  font-size: 16px;
 }
 .topbar{
   height:32px;
@@ -27,15 +38,7 @@ body, a:link, a:visited, a:active{
   border-radius:10px;
   position:absolute;
 }
-.sonic{
-  transform: null;
-  -webkit-transform: null;
-  transition: transform 2s;
-  -webkit-transition: -webkit-transform 2s;
-}
 .sonic:hover{
-  transition: transform 2s;
-  -webkit-transition: -webkit-transform 2s;
   transform: rotate(-3230deg);
   -webkit-transform: rotate(-3230deg);
 }

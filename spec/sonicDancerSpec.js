@@ -20,15 +20,15 @@ describe("sonicDancer", function() {
   });
 
   describe("dance", function(){
-    it("should call step at least once per second", function(){
+    it("should call step every 700ms (masking parent step)", function(){
       sinon.spy(sonicDancer, "step");
       expect(sonicDancer.step.callCount).to.be.equal(0);
-      clock.tick(timeBetweenSteps); // ? it seems an extra tick is necessary...
-      clock.tick(timeBetweenSteps);
+      clock.tick(700); // ? it seems an extra tick is necessary...
+      clock.tick(700);
 
       expect(sonicDancer.step.callCount).to.be.equal(1);
 
-      clock.tick(timeBetweenSteps);
+      clock.tick(700);
       expect(sonicDancer.step.callCount).to.be.equal(2);
     });
   });
